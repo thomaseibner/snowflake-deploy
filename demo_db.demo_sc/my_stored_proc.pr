@@ -1,0 +1,18 @@
+CREATE OR REPLACE PROCEDURE "MY_STORED_PROC"("PARAMETER" VARCHAR(16777216), "DRYRUN" Boolean)
+RETURNS VARCHAR(16777216)
+LANGUAGE JAVASCRIPT
+EXECUTE AS OWNER
+AS '
+
+var logtxt = "[Started] MY_STORED_PROC";
+const parameter = String(PARAMETER).trim().toUpperCase();
+const dryrun = DRYRUN;
+
+logtxt += "\\nPARAMETERS\\nPARAMETER: " + parameter + "\\nDRYRUN: " + dryrun;
+if (dryrun) {
+   logtxt += "\\nDRYRUN\\n";
+}
+logtxt += "\\n[Finished] MY_STORED_PROC.\\n";
+
+return logtxt;
+';
