@@ -9,22 +9,23 @@ Simple python-based framework for quickly deploying code or objects during devel
 1. [Overview](#overview)
 1. [Setup](#setup)
 1. [Dependencies](#dependencies)
+1. [Future Enhancements](#future_enhancements)
 1. [Author](#author)
 1. [License](#license)
 
 ## Setup
 
-=mkdir ~/.snowflake=
+`mkdir ~/.snowflake`
 
-Follow the guide on [Key Pair Auth @ Snowflake.com](https://docs.snowflake.com/en/user-guide/key-pair-auth.html#step-1-generate-the-private-key) to create a =rsa_key.p8= private key and an =rsa_key.pub= public key to assign the user in Snowflake.
+Follow the guide on [Key Pair Auth @ Snowflake.com](https://docs.snowflake.com/en/user-guide/key-pair-auth.html#step-1-generate-the-private-key) to create a `rsa_key.p8` private key and an `rsa_key.pub` public key to assign the user in Snowflake.
 
-Alter your user in Snowflake to set the rsa_public_key to the key in =rsa_key.pub=
+Alter your user in Snowflake to set the rsa_public_key to the key in `rsa_key.pub`
 
-Place the private key in your =~/.snowflake/= directory and ensure it is only readable by yourself (=chmod 600 rsa_key.p8=)
+Place the private key in your `~/.snowflake/` directory and ensure it is only readable by yourself (`chmod 600 rsa_key.p8`)
 
-This code assumes your key isn't encrypted by default so no passphrase is required. You can decide to have your key passphrase as an environment variable to unlock the key with or alter the =sfConn.py= class to accept the passphrase as an input.
+This code assumes your key isn't encrypted by default so no passphrase is required. You can decide to have your key passphrase as an environment variable to unlock the key with or alter the `sfConn.py` class to accept the passphrase as an input.
 
-To setup the deployments you create a =config.json= containing your connection parameters in your main directory containing the =sfConfig.py, sfConn.py, and deploy.py= script:
+To setup the deployments you create a `config.json` containing your connection parameters in your main directory containing the `sfConfig.py, sfConn.py, and deploy.py` script:
 
 ```
 {
@@ -36,13 +37,13 @@ To setup the deployments you create a =config.json= containing your connection p
     "schema"    : "PUBLIC"
 }
 ```
-You can override individual options by placing a =config.json= file in each directory to reflect the database/schema/roles required for deploying objects. Sample override of a single schema inheriting the remaining configuration from the file above:
+You can override individual options by placing a `config.json` file in each directory to reflect the database/schema/roles required for deploying objects. Sample override of a single schema inheriting the remaining configuration from the file above:
 ```
 {
     "schema"    : "DEMO_SC"
 }
 ```
-What to deploy is defined in the =deploy.json= file in each directory you have. It is set up similar to the configuration file, but instead using an array to force the order of files being applied:
+What to deploy is defined in the `deploy.json` file in each directory you have. It is set up similar to the configuration file, but instead using an array to force the order of files being applied:
 ```
 [
     "my_stored_proc.drop",
@@ -85,6 +86,10 @@ DRYRUN
 ## Dependencies
 
 Python 3.8+ with the Snowflake connector installed
+
+## Future Enhancements
+
+Ability to deploy the required files for a single object, many, or all.
 
 ## Author
 
