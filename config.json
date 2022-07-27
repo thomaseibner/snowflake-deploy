@@ -5,5 +5,4 @@
     "role"      : "DEMO_ROLE",
     "database"  : "DEMO_DB",
     "schema"    : "PUBLIC"
-
 }
