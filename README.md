@@ -56,7 +56,7 @@ As you can see you can execute any single statement and the script will deploy a
 Now you can run the deploy.py script in the directory with your files:
 
 ```
-(snowpark) thomas@dl360p:~/github/snowflake-auto-deploy/demo_db.demo_sc$ ../deploy.py
+thomas@dl360p:~/github/snowflake-deploy/demo_db.demo_sc$ ../deploy.py
 Connecting ...
 Verifying connection ...
 Connected to <YOUR_SNOWFLAKE_ACCOUNT>
