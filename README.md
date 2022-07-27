@@ -91,6 +91,8 @@ Python 3.8+ with the Snowflake connector installed
 
 Ability to deploy the required files for a single object, many, or all.
 
+Ability to only upload if timestamp has changed on files compared to last modified date of object in Snowflake.
+
 ## Author
 
 Thomas Eibner (@thomaseibner) [twitter](http://twitter.com/thomaseibner) [LinkedIn](https://www.linkedin.com/in/thomaseibner/)
