@@ -48,10 +48,12 @@ What to deploy is defined in the `deploy.json` file in each directory you have. 
 [
     "my_stored_proc.drop",
     "my_stored_proc.pr",
-    "my_stored_proc.test1"
+    "my_stored_proc.test1",
+    "python.stg",
+    "@python"
 ]
 ```
-As you can see you can execute any single statement and the script will deploy and retrieve the output of any statement executed, which allows you to run a test or populate data immediately after installing an object. 
+As you can see you can execute any single statement and the script will deploy and retrieve the output of any statement executed, which allows you to run a test or populate data immediately after installing an object. Notice the special `@python` line - this will upload any files in the sub-directory `python/` to the stage with the same name `@python`. This can be used both for a stage containing files for Snowpark Python or as a way to upload sample data files to load in later steps in the deployment.
 
 Now you can run the deploy.py script in the directory with your files:
 
@@ -81,6 +83,11 @@ DRYRUN: 1
 
 DRYRUN
 [Finished] MY_STORED_PROC
+
+Deploying python.stg ... done
+Deploying files to the stage @python
+PUT file:///home/user/github/snowflake-deploy/demo_db.demo_sc/python/test.py @python AUTO_COMPRESS = FALSE OVERWRITE = TRUE
+PUT file:///home/user/github/snowflake-deploy/demo_db.demo_sc/python/myproj/test.py @python/myproj AUTO_COMPRESS = FALSE OVERWRITE = TRUE
 ```
 
 ## Dependencies

@@ -1,5 +1,7 @@
 [
     "my_stored_proc.drop",
     "my_stored_proc.pr",
-    "my_stored_proc.test1"
+    "my_stored_proc.test1",
+    "python.stg",
+    "@python"
 ]

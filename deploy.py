@@ -2,6 +2,7 @@
 
 import json
 import os
+from os import walk
 from sfConn import SfConn
 from sfConfig import SfConfig
 
@@ -29,19 +30,34 @@ def main():
 
     print("Deploying scripts ...")
     for file in deploy_order:
-        print(f"Deploying {file} ...", end='')
-        if (file_exists(cur_dir + '/' + file)):
-            file_contents = open(str(cur_dir + '/' + file)).read()
-            cursor = sf_conn.run_query(file_contents)
-            print(" done")
-            print()
-            for res_sth in cursor:
-                res_str = ','.join([str(x) for x in res_sth])
-                print(res_str)
-            cursor.close()
+        if (file[0] != '@'):
+            # Should we allow multiple statements in a single file?
+            print(f"Deploying {file} ...", end='')
+            if (file_exists(os.path.join(cur_dir, file)):
+                file_contents = open(str(os.path.join(cur_dir, file))).read()
+                cursor = sf_conn.run_query(file_contents)
+                print(" done")
+                print()
+                for res_sth in cursor:
+                    res_str = ','.join([str(x) for x in res_sth])
+                    print(res_str)
+                cursor.close()
+            else:
+                print("not found!")
         else:
-            print("not found!")
-
+            # Deploy objects in directory following @ into the stage
+            stage = file
+            directory = file[1:]
+            print(f"Deploying files to the stage {stage}")
+            if (file_exists(directory) == False):
+                print(f"Directory {directory} does not exist")
+                break
+            for r, d, f in os.walk(directory):
+                # remove the directory from the path 
+                upload_dir = r[(len(directory)):]
+                for stg_file in f:
+                    print(f"PUT file://{os.path.join(cur_dir, r, stg_file)} {file}{upload_dir} AUTO_COMPRESS = FALSE OVERWRITE = TRUE")
+                
     sf_conn.close_conn()
 
 if __name__ == "__main__":

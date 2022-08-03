@@ -1,1 +1,1 @@
-drop procedure "MY_STORED_PROC"(VARCHAR(16777216), BOOLEAN);
+drop procedure if exists "MY_STORED_PROC"(VARCHAR(16777216), BOOLEAN);
