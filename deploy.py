@@ -33,7 +33,7 @@ def main():
         if (file[0] != '@'):
             # Should we allow multiple statements in a single file?
             print(f"Deploying {file} ...", end='')
-            if (file_exists(os.path.join(cur_dir, file)):
+            if (file_exists(os.path.join(cur_dir, file))):
                 file_contents = open(str(os.path.join(cur_dir, file))).read()
                 cursor = sf_conn.run_query(file_contents)
                 print(" done")
@@ -56,7 +56,13 @@ def main():
                 # remove the directory from the path 
                 upload_dir = r[(len(directory)):]
                 for stg_file in f:
-                    print(f"PUT file://{os.path.join(cur_dir, r, stg_file)} {file}{upload_dir} AUTO_COMPRESS = FALSE OVERWRITE = TRUE")
+                    print(f"Uploading file {stg_file} to {file}{upload_dir} ", end='')
+                    cursor = sf_conn.run_query(f"PUT file://{os.path.join(cur_dir, r, stg_file)} {file}{upload_dir} AUTO_COMPRESS = FALSE OVERWRITE = TRUE")
+                    print (" done")
+                    for res_sth in cursor:
+                        res_str = ','.join([str(x) for x in res_sth])
+                        print(res_str)
+                    cursor.close()
                 
     sf_conn.close_conn()
 
