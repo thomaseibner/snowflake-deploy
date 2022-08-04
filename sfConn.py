@@ -17,7 +17,7 @@ class SfConn():
         self.schema    = config['schema']
         self.home      = os.environ['HOME']
 
-        with open(f"{self.home}/.snowflake/rsa_key.p8", "rb") as key:
+        with open(os.path.join(self.home, '.snowflake', 'rsa_key.p8'), "rb") as key:
             p_key= serialization.load_pem_private_key(
                 key.read(),
                 password=None,
@@ -85,8 +85,9 @@ class SfConn():
         except sf.errors.ProgrammingError as e:
             # default error message
             err_msg = f"DB Error when running query: '{query}': {e}"
-            # print(err_msg)
-            raise sf.errors.ProgrammingError(err_msg)
+            print(err_msg)
+            exit(2)
+            #raise sf.errors.ProgrammingError(err_msg)
         return curs
 
     def run_multiple_queries(self, query, cursor = None):
