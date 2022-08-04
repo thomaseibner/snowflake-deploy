@@ -85,9 +85,13 @@ DRYRUN
 [Finished] MY_STORED_PROC
 
 Deploying python.stg ... done
+
+Stage area PYTHON successfully created.
 Deploying files to the stage @python
-PUT file:///home/user/github/snowflake-deploy/demo_db.demo_sc/python/test.py @python AUTO_COMPRESS = FALSE OVERWRITE = TRUE
-PUT file:///home/user/github/snowflake-deploy/demo_db.demo_sc/python/myproj/test.py @python/myproj AUTO_COMPRESS = FALSE OVERWRITE = TRUE
+Uploading file test.py to @python  done
+test.py,test.py,135,144,NONE,NONE,UPLOADED,
+Uploading file test.py to @python/myproj  done
+test.py,test.py,135,144,NONE,NONE,UPLOADED,
 ```
 
 ## Dependencies
