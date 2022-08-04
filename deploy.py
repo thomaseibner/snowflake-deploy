@@ -20,10 +20,8 @@ def main():
     sf_conn = SfConn(cfg.config)
     sf_conn.verify_conn()
 
-    deploy_config = None
-    if (file_exists(cur_dir + '/deploy.json')):
-        deploy_config = cur_dir + '/deploy.json'
-    else:
+    deploy_config = os.path.join(cur_dir, 'deploy.json')
+    if (file_exists(deploy_config) == False):
         print(f"No deploy.json file found in {cur_dir}")
         exit(2)
     deploy_order = json.loads(open(str(deploy_config)).read())    
