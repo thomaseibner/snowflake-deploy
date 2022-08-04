@@ -1,1 +1,1 @@
-call my_stored_proc('TEST, 1);
+call my_stored_proc('TEST', 1);
